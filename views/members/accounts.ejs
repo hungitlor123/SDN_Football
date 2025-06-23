@@ -1,0 +1,43 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 80vh"
+>
+  <div
+    class="card shadow-lg p-4 w-100"
+    style="max-width: 900px; border-radius: 20px"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0" style="color: #1a2236">
+        <i class="fas fa-users me-2"></i>All Accounts
+      </h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-warning">
+          <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Year of Birth</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% members.forEach(member => { %>
+          <tr>
+            <td><%= member.membername %></td>
+            <td><%= member.name %></td>
+            <td><%= member.YOB %></td>
+            <td>
+              <% if (member.isAdmin) { %>
+              <span class="badge bg-danger">Admin</span>
+              <% } else { %>
+              <span class="badge bg-primary">Member</span>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

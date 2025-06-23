@@ -1,0 +1,406 @@
+/* Custom styles for Football Players website */
+
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/* Player Cards */
+.player-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.player-image {
+  height: 250px;
+  object-fit: cover;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.player-detail-image {
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Captain Badges */
+.captain-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #8b5a00;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  z-index: 10;
+}
+
+.captain-badge i {
+  font-size: 0.8rem;
+  color: #8b5a00;
+}
+
+.captain-badge-large {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #8b5a00;
+  padding: 10px 15px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.captain-badge-large i {
+  font-size: 1rem;
+  color: #8b5a00;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  }
+  to {
+    box-shadow: 0 4px 25px rgba(255, 215, 0, 0.7);
+  }
+}
+
+/* Captain Info Alert */
+.captain-info {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 2px solid #ffd700;
+  border-left: 5px solid #ffd700;
+}
+
+.captain-info .alert-heading {
+  color: #8b5a00;
+}
+
+/* Captain Status Sidebar */
+.captain-status-sidebar {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff9e6, #ffeaa7);
+  border-radius: 10px;
+  border: 2px solid #ffd700;
+  position: relative;
+  overflow: hidden;
+}
+
+.captain-status-sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Navigation */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Comments */
+.comment {
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
+}
+
+.comment:hover {
+  background-color: #e9ecef;
+}
+
+.rating {
+  font-size: 1.1rem;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border-radius: 15px 15px 0 0 !important;
+  border: none;
+}
+
+/* Forms */
+.form-control {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group-text {
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #e9ecef;
+  border-right: none;
+  background-color: #f8f9fa;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, #2c3e50, #34495e) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-image {
+    height: 200px;
+  }
+
+  .captain-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  .captain-badge-large {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .display-6 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Captain Crown Animation */
+.fa-crown {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Dashboard Form Styles */
+.dashboard-form-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 2.5rem 2rem;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.dashboard-form-card label {
+  font-weight: 600;
+  color: #1a2236;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-form-card .form-control,
+.dashboard-form-card .form-select {
+  border-radius: 10px;
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e9ecef;
+  background: #f8f9fa;
+  margin-bottom: 1rem;
+}
+
+.dashboard-form-card .form-control:focus,
+.dashboard-form-card .form-select:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 0 0.15rem rgba(255, 215, 0, 0.15);
+  background: #fff;
+}
+
+.dashboard-form-card .form-check-label {
+  font-weight: 600;
+  color: #1a2236;
+  margin-left: 0.5rem;
+}
+
+.dashboard-form-card .btn-warning,
+.dashboard-form-card .btn-outline-warning {
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.6rem 2rem;
+}
+
+.dashboard-form-card .btn-outline-secondary {
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.dashboard-form-card .btn-warning {
+  background: linear-gradient(90deg, #ffd700 60%, #ffed4e 100%);
+  color: #1a2236;
+  border: none;
+}
+
+.dashboard-form-card .btn-warning:hover {
+  background: linear-gradient(90deg, #ffed4e 0%, #ffd700 100%);
+  color: #1a2236;
+}
+
+.dashboard-form-card .btn-outline-warning {
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  background: #fff;
+}
+
+.dashboard-form-card .btn-outline-warning:hover {
+  background: #ffd700;
+  color: #1a2236;
+}
+
+.dashboard-form-card .form-check-input:checked {
+  background-color: #ffd700;
+  border-color: #ffd700;
+}
+
+.dashboard-form-card .form-check-input {
+  border-radius: 50%;
+  border: 2px solid #ffd700;
+}
+
+.dashboard-form-card .form-check-label i {
+  color: #ffd700;
+  margin-left: 0.2rem;
+}
+
+.dashboard-form-card .back-btn {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .dashboard-form-card {
+    padding: 1.2rem 0.5rem;
+  }
+}
+
+.captain-badge-modern {
+  width: 32px;
+  height: 32px;
+  background: #fffbe6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffd700;
+  font-size: 1.1rem;
+  color: #ffd700;
+  top: 0;
+  right: 0;
+}
+
+.player-stats-card {
+  border-radius: 18px;
+  background: #f8f9fa;
+  margin-top: 1.5rem;
+}
+
+.card-header {
+  background: #fff !important;
+  color: #1a2236 !important;
+  border-bottom: 1px solid #f4f6fa;
+}
+
+.btn-warning {
+  border-radius: 20px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffd700 60%, #ffed4e 100%);
+  color: #1a2236;
+  border: none;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(90deg, #ffed4e 0%, #ffd700 100%);
+}
+
+.comment-badge {
+  background: #f4f6fa;
+  color: #007bff;
+  font-size: 0.95rem;
+  border-radius: 16px;
+  padding: 3px 12px 3px 8px;
+  border: 1px solid #e9ecef;
+}
+
+.player-detail-card {
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+}
+
+.player-detail-avatar {
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 12px 0 rgba(255, 215, 0, 0.18);
+}

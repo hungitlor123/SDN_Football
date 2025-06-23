@@ -1,0 +1,94 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0" style="color: #1a2236">
+      <i class="fas fa-users-cog me-2"></i>Player Management
+    </h2>
+    <a href="/admin/teams" class="btn btn-outline-warning fw-bold">
+      <i class="fas fa-shield-alt me-1"></i>Manage Teams
+    </a>
+  </div>
+  <div class="card shadow-lg p-3" style="border-radius: 20px">
+    <div class="mb-3 text-end">
+      <a href="/admin/players/new" class="btn btn-warning fw-bold">
+        <i class="fas fa-plus me-1"></i>Add New Player
+      </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-warning">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Value</th>
+            <th>Captain</th>
+            <th>Info</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% players.forEach(player => { %>
+          <tr>
+            <td>
+              <img
+                src="<%= player.image %>"
+                alt="<%= player.playerName %>"
+                style="
+                  width: 70px;
+                  height: 50px;
+                  object-fit: cover;
+                  border-radius: 8px;
+                  border: 2px solid #eee;
+                "
+              />
+            </td>
+            <td class="fw-bold" style="color: #1a2236">
+              <%= player.playerName %> <% if (player.isCaptain) { %>
+              <i class="fas fa-crown text-warning ms-1" title="Captain"></i>
+              <% } %>
+            </td>
+            <td><%= player.team.teamName %></td>
+            <td class="text-success fw-bold">
+              $<%= player.cost.toLocaleString() %>
+            </td>
+            <td>
+              <% if (player.isCaptain) { %>
+              <span class="badge bg-warning text-dark"
+                ><i class="fas fa-crown"></i> Captain</span
+              >
+              <% } else { %>
+              <span class="badge bg-secondary">No</span>
+              <% } %>
+            </td>
+            <td class="small text-muted">
+              <%= player.infomation.length > 40 ? player.infomation.substring(0,
+              40) + '...' : player.infomation %>
+            </td>
+            <td>
+              <a
+                href="/admin/players/<%= player._id %>/edit"
+                class="btn btn-sm btn-outline-primary fw-bold me-1"
+              >
+                <i class="fas fa-edit"></i> Edit
+              </a>
+              <form
+                action="/admin/players/<%= player._id %>?_method=DELETE"
+                method="POST"
+                class="d-inline"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-sm btn-outline-danger fw-bold"
+                  onclick="return confirm('Are you sure you want to delete this player?');"
+                >
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

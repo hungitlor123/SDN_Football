@@ -1,0 +1,131 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 90vh"
+>
+  <div
+    class="card shadow-lg p-4"
+    style="max-width: 500px; width: 100%; border-radius: 18px"
+  >
+    <div class="text-center mb-4">
+      <i class="fas fa-user-plus fa-3x mb-2 text-warning"></i>
+      <h2 class="fw-bold mb-0" style="color: #1a2236">Sign Up</h2>
+      <div class="text-muted mb-2">Football Manager</div>
+    </div>
+    <% if (error) { %>
+    <div class="alert alert-danger" role="alert">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      <%= error %>
+    </div>
+    <% } %>
+    <form action="/register" method="POST" id="registerForm">
+      <div class="mb-3">
+        <label for="membername" class="form-label">Username *</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          id="membername"
+          name="membername"
+          value="<%= formData.membername || '' %>"
+          required
+          style="border-radius: 10px"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name *</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          id="name"
+          name="name"
+          value="<%= formData.name || '' %>"
+          required
+          style="border-radius: 10px"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password *</label>
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          id="password"
+          name="password"
+          minlength="6"
+          required
+          style="border-radius: 10px"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label"
+          >Confirm Password *</label
+        >
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          id="confirmPassword"
+          name="confirmPassword"
+          minlength="6"
+          required
+          style="border-radius: 10px"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="YOB" class="form-label">Year of Birth *</label>
+        <input
+          type="number"
+          class="form-control form-control-lg"
+          id="YOB"
+          name="YOB"
+          min="1900"
+          max="2010"
+          value="<%= formData.YOB || '' %>"
+          required
+          style="border-radius: 10px"
+        />
+        <div class="form-text">Enter a valid year between 1900 and 2010</div>
+      </div>
+      <div class="alert alert-info py-2">
+        <i class="fas fa-info-circle me-2"></i>
+        <strong>Note:</strong> New accounts are created with regular member
+        privileges. Admin access is not available through registration.
+      </div>
+      <div class="d-grid mb-2">
+        <button
+          type="submit"
+          class="btn btn-warning btn-lg fw-bold"
+          id="registerBtn"
+        >
+          <span id="registerBtnText"
+            ><i class="fas fa-user-plus me-1"></i>Register</span
+          >
+        </button>
+      </div>
+    </form>
+    <div class="text-center mt-3">
+      <span class="text-muted">Already have an account?</span>
+      <a
+        href="/login"
+        class="fw-bold text-decoration-none"
+        style="color: #1a2236"
+        >Login</a
+      >
+    </div>
+  </div>
+</div>
+<script>
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", function (e) {
+      var pw = document.getElementById("password").value;
+      var cpw = document.getElementById("confirmPassword").value;
+      var btn = document.getElementById("registerBtn");
+      var btnText = document.getElementById("registerBtnText");
+      if (pw !== cpw) {
+        e.preventDefault();
+        alert("Passwords do not match!");
+        return false;
+      }
+      btn.disabled = true;
+      btnText.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2"></span>Registering...';
+    });
+</script>

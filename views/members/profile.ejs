@@ -1,0 +1,123 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 80vh"
+>
+  <div
+    class="card shadow-lg p-4 w-100"
+    style="max-width: 700px; border-radius: 20px"
+  >
+    <div class="row g-4">
+      <div
+        class="col-md-4 text-center d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="mb-3">
+          <i class="fas fa-user-circle fa-6x text-warning"></i>
+        </div>
+        <h4 class="fw-bold mb-1" style="color: #1a2236">My Profile</h4>
+        <div class="text-muted mb-2">Football Manager</div>
+        <div class="mb-2">
+          <span
+            class="badge <%= member.isAdmin ? 'bg-danger' : 'bg-primary' %>"
+          >
+            <%= member.isAdmin ? 'Administrator' : 'Member' %>
+          </span>
+        </div>
+        <div class="small text-muted mb-2">
+          Member since <%= new Date(member.createdAt).toLocaleDateString() %>
+        </div>
+        <a
+          href="/change-password"
+          class="btn btn-outline-warning btn-sm mb-2 w-100"
+        >
+          <i class="fas fa-key me-1"></i> Change Password
+        </a>
+      </div>
+      <div class="col-md-8">
+        <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success" role="alert">
+          <i class="fas fa-check-circle me-2"></i>
+          <%= success %>
+        </div>
+        <% } %> <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          <%= error %>
+        </div>
+        <% } %>
+        <form action="/profile" method="POST">
+          <div class="mb-3">
+            <label for="membername" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="membername"
+              name="membername"
+              value="<%= member.membername %>"
+              readonly
+              style="border-radius: 10px; background: #f4f6fa"
+            />
+            <div class="form-text">Username cannot be changed</div>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name *</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="name"
+              name="name"
+              value="<%= member.name %>"
+              required
+              style="border-radius: 10px"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="YOB" class="form-label">Year of Birth *</label>
+            <input
+              type="number"
+              class="form-control form-control-lg"
+              id="YOB"
+              name="YOB"
+              min="1900"
+              max="2010"
+              value="<%= member.YOB %>"
+              required
+              style="border-radius: 10px"
+            />
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-warning btn-lg fw-bold">
+              <i class="fas fa-save me-1"></i> Update Profile
+            </button>
+          </div>
+        </form>
+        <div class="mt-4">
+          <h6 class="fw-bold mb-2" style="color: #1a2236">
+            <i class="fas fa-info-circle me-2"></i>Account Summary
+          </h6>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="small text-muted">Username</div>
+              <div class="fw-bold"><%= member.membername %></div>
+            </div>
+            <div class="col-6">
+              <div class="small text-muted">Full Name</div>
+              <div class="fw-bold">
+                <%= member && member.name ? member.name : 'Unknown' %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="small text-muted">Year of Birth</div>
+              <div class="fw-bold"><%= member.YOB %></div>
+            </div>
+            <div class="col-6">
+              <div class="small text-muted">Role</div>
+              <div class="fw-bold">
+                <%= member.isAdmin ? 'Administrator' : 'Member' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

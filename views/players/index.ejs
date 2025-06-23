@@ -1,0 +1,95 @@
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0" style="color: #1a2236;"><i class="fas fa-users me-2"></i><%= title %></h2>
+    </div>
+    <div class="card shadow-sm mb-4" style="border-radius: 16px;">
+        <div class="card-body">
+            <form class="row g-3" method="GET" action="/search">
+                <div class="col-md-6">
+                    <label for="search" class="form-label">Search Players</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text" class="form-control" id="search" name="q" placeholder="Search by player name..." value="<%= searchQuery %>" style="border-radius: 10px;">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="team" class="form-label">Filter by Team</label>
+                    <select class="form-select" id="team" name="team" style="border-radius: 10px;">
+                        <option value="">All Teams</option>
+                        <% teams.forEach(team => { %>
+                            <option value="<%= team._id %>" <%= selectedTeam === team._id.toString() ? 'selected' : '' %>><%= team.teamName %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-warning w-100 fw-bold">
+                        <i class="fas fa-search me-1"></i>Search
+                    </button>
+                </div>
+            </form>
+            <% if (searchQuery || selectedTeam) { %>
+                <div class="mt-3">
+                    <a href="/" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-times me-1"></i>Clear Filters
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <% if (players.length === 0) { %>
+        <div class="text-center py-5">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">No players found</h3>
+            <p class="text-muted">Try adjusting your search criteria or browse all players.</p>
+            <% if (searchQuery || selectedTeam) { %>
+                <a href="/" class="btn btn-warning fw-bold">
+                    <i class="fas fa-home me-1"></i>View All Players
+                </a>
+            <% } %>
+        </div>
+    <% } else { %>
+        <div class="row">
+            <% players.forEach(player => { %>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow player-card border-0" style="border-radius: 18px; transition: box-shadow 0.3s;">
+                        <div class="position-relative">
+                            <img src="<%= player.image %>" class="card-img-top player-image" alt="<%= player.playerName %>" style="border-radius: 18px 18px 0 0; height: 220px; object-fit: cover;">
+                            <% if (player.isCaptain) { %>
+                                <div class="captain-badge-modern position-absolute top-0 end-0 m-2" title="Team Captain">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-1 fw-bold" style="color: #1a2236;">
+                                <%= player.playerName %>
+                                <% if (player.isCaptain) { %>
+                                    <i class="fas fa-crown text-warning ms-1" title="Team Captain"></i>
+                                <% } %>
+                            </h5>
+                            <div class="mb-2 small text-muted"><i class="fas fa-shield-alt me-1"></i><%= player.team.teamName %></div>
+                            <div class="mb-2 text-success fw-bold"><i class="fas fa-dollar-sign me-1"></i>$<%= player.cost.toLocaleString() %></div>
+                            <div class="mb-2 flex-grow-1 small text-muted">
+                                <%= player.infomation.length > 100 ? player.infomation.substring(0, 100) + '...' : player.infomation %>
+                            </div>
+                            <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
+                                <% if (player.comments && player.comments.length > 0) { %>
+                                    <span class="comment-badge">
+                                        <i class="fas fa-comments me-1"></i><%= player.comments.length %>
+                                    </span>
+                                <% } else { %>
+                                    <span class="comment-badge text-muted">
+                                        <i class="fas fa-comments me-1"></i>0
+                                    </span>
+                                <% } %>
+                                <a href="/players/<%= player._id %>" class="btn btn-view-details">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div> 
