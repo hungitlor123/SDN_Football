@@ -12,6 +12,7 @@ function requireAdminUI(req, res, next) {
       title: "Forbidden",
       message: "You do not have permission to access this page.",
       error: "Admin access required.",
+      activePage: null,
     });
   }
   next();
