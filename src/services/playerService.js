@@ -4,9 +4,15 @@ import Members from "../models/member.js";
 
 const createPlayer = async (playerData) => {
   try {
-    const { team } = playerData;
+    const { team, playerName } = playerData;
     if (!team) {
       throw new Error("Team is required");
+    }
+
+    // Check if player name already exists
+    const existingPlayer = await Players.findOne({ playerName: playerName });
+    if (existingPlayer) {
+      throw new Error("Player name already exists");
     }
 
     const teamExists = await Teams.findById(team);
@@ -62,6 +68,17 @@ const getPlayerById = async (playerId) => {
 
 const updatePlayer = async (playerId, playerData) => {
   try {
+    // Check if player name already exists (excluding current player)
+    if (playerData.playerName) {
+      const existingPlayer = await Players.findOne({
+        playerName: playerData.playerName,
+        _id: { $ne: playerId },
+      });
+      if (existingPlayer) {
+        throw new Error("Player name already exists");
+      }
+    }
+
     if (playerData.team) {
       const teamExists = await Teams.findById(playerData.team);
       if (!teamExists) {

@@ -8,7 +8,7 @@ export const authService = {
 
     const existingMember = await Member.findOne({ membername });
     if (existingMember) {
-      throw new Error("Member already exists");
+      throw new Error("Username already exists");
     }
 
     const saltRounds = 10;

@@ -1,7 +1,14 @@
 import Teams from "../models/team.js";
+import Players from "../models/player.js";
 
 const createTeam = async (teamData) => {
   try {
+    // Check if team name already exists
+    const existingTeam = await Teams.findOne({ teamName: teamData.teamName });
+    if (existingTeam) {
+      throw new Error("Team name already exists");
+    }
+
     const newTeam = new Teams(teamData);
     await newTeam.save();
     return newTeam;
@@ -30,6 +37,17 @@ const getTeamById = async (teamId) => {
 
 const updateTeam = async (teamId, teamData) => {
   try {
+    // Check if team name already exists (excluding current team)
+    if (teamData.teamName) {
+      const existingTeam = await Teams.findOne({
+        teamName: teamData.teamName,
+        _id: { $ne: teamId },
+      });
+      if (existingTeam) {
+        throw new Error("Team name already exists");
+      }
+    }
+
     const updatedTeam = await Teams.findByIdAndUpdate(teamId, teamData, {
       new: true,
     });
@@ -41,6 +59,11 @@ const updateTeam = async (teamId, teamData) => {
 
 const deleteTeam = async (teamId) => {
   try {
+    // Check if any player belongs to this team
+    const playerCount = await Players.countDocuments({ team: teamId });
+    if (playerCount > 0) {
+      throw new Error("Cannot delete team: There are players in this team");
+    }
     const deletedTeam = await Teams.findByIdAndDelete(teamId);
     if (!deletedTeam) {
       return null;
